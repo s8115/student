@@ -21,4 +21,20 @@ public class StudentOperacje {
 		session.close();
 	}
 
+	
+	public Student findStudentById(Long id) {
+		// otwiera sesje hibernate
+		SessionFactory sessionFactory = new Configuration().configure()
+				.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		//wybranie encji po id (select * from student where id = ?)
+		Student student = (Student) session.get(Student.class, id);
+		
+		// zamkniecie sesji
+		session.close();
+		
+		return student;
+	}
+
 }
