@@ -3,31 +3,32 @@ package s8115.student;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+// encja 
 @Entity
 public class Student {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+	@Id // primary key
+	@GeneratedValue // automatycznie generowanie wartosci
+	
+	private Long id;  // pole = kolumna 
 
-	private String imie;
+	private String imie; // pole = kolumna
 
-	private String nazwisko;
+	private String nazwisko; // pole = kolumna
 
-	private String pesel;
+	private String pesel; // pole = kolumna
 
-	private String telefon;
+	private String telefon; // pole = kolumna
 
-	public Long getId() {
+	public Long getId() {    // metoda udostepniajaca wartosc pola
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Long id) { // metoda do ustawiania wartosc pola
 		this.id = id;
 	}
 
-	public String getImie() {
+	public String getImie() {  // metoda do pobierania wartosc
 		return imie;
 	}
 

@@ -1,4 +1,7 @@
+// klasa ktora otwiera sesje habernate
 package s8115.student;
+
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,7 +14,7 @@ public class StudentOperacje {
 		SessionFactory sessionFactory = new Configuration().configure()
 				.buildSessionFactory();
 		Session session = sessionFactory.openSession();
-		// otwiera transakcje
+		// otwiera transakcje bazy danych
 		session.beginTransaction();
 		// zapisuje studenta
 		session.persist(student);
@@ -36,5 +39,33 @@ public class StudentOperacje {
 		
 		return student;
 	}
+	
+	public List<Student> findAllStudent() {
+		// otwiera sesje hibernate
+		SessionFactory sessionFactory = new Configuration().configure()
+				.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		// tworzenie zapytania 
+		List<Student> listaStudent = session.createQuery("select s from Student s").list();
+		
+		// zamkniecie sesji
+		session.close();
+		// zwroc liste
+		return listaStudent;
+	}
 
+	public void updateStudent(Student student) {
+		// otwiera sesje hibernate
+		SessionFactory sessionFactory = new Configuration().configure()
+				.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		// otwiera transakcje
+		session.beginTransaction();
+		// update obiektu - inacze update
+		session.update(student);
+		// commituje transakcje, zatwierdza
+		session.getTransaction().commit();
+		// zamkniecie sesji
+		session.close();
+	}	
 }
