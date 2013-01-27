@@ -15,10 +15,10 @@ public class StudentTest {
 		StudentOperacje studentOperacje = new StudentOperacje();
 
 		Student s = new Student();
-		s.setImie("Marek");
-		s.setNazwisko("Nowak");
-		s.setPesel("1234325678");
-		s.setTelefon("674893095");
+		s.setImie("Mi³osz");
+		s.setNazwisko("Talmon");
+		s.setPesel("78110606353");
+		s.setTelefon("783050098");
 
 		studentOperacje.saveStudent(s);
 	}
@@ -28,10 +28,19 @@ public class StudentTest {
 
 		StudentOperacje studentOperacje = new StudentOperacje();
 
-		Student s = studentOperacje.findStudentById(5L);
+		Student s = new Student();
+		s.setImie("Marek");
+		s.setNazwisko("Nowak");
+		s.setPesel("1234325678");
+		s.setTelefon("674893095");
 
-		Assert.assertNotNull(s);
-		Assert.assertEquals("Ania", s.getImie());
+		studentOperacje.saveStudent(s);
+		
+
+		Student s1 = studentOperacje.findStudentById(s.getId());
+
+		Assert.assertNotNull(s1);
+		Assert.assertEquals("Marek", s1.getImie());
 		
 		
 	}
@@ -44,6 +53,18 @@ public class StudentTest {
 
 		List<Student>ListaStudent = studentOperacje.findAllStudent();
 		
+		for(Student s : ListaStudent){
+			System.out.println(s.getImie() + " " + s.getNazwisko());
+		}
+	}
+	
+	@Test  // testuje wyszukanie liste studentow
+	public void findListStudentByImieTest() {
+
+		StudentOperacje studentOperacje = new StudentOperacje();
+
+		List<Student>ListaStudent = studentOperacje.findStudentByFilter("Marek");
+		System.out.println("@@@@@ SZUKANY OBIEKT:");
 		for(Student s : ListaStudent){
 			System.out.println(s.getImie() + " " + s.getNazwisko());
 		}

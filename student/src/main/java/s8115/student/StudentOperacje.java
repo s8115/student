@@ -24,30 +24,30 @@ public class StudentOperacje {
 		session.close();
 	}
 
-	
 	public Student findStudentById(Long id) {
 		// otwiera sesje hibernate
 		SessionFactory sessionFactory = new Configuration().configure()
 				.buildSessionFactory();
 		Session session = sessionFactory.openSession();
-		
-		//wybranie encji po id (select * from student where id = ?)
+
+		// wybranie encji po id (select * from student where id = ?)
 		Student student = (Student) session.get(Student.class, id);
-		
+
 		// zamkniecie sesji
 		session.close();
-		
+
 		return student;
 	}
-	
+
 	public List<Student> findAllStudent() {
 		// otwiera sesje hibernate
 		SessionFactory sessionFactory = new Configuration().configure()
 				.buildSessionFactory();
 		Session session = sessionFactory.openSession();
-		// tworzenie zapytania 
-		List<Student> listaStudent = session.createQuery("select s from Student s").list();
-		
+		// tworzenie zapytania
+		List<Student> listaStudent = session.createQuery(
+				"select s from Student s").list();
+
 		// zamkniecie sesji
 		session.close();
 		// zwroc liste
@@ -67,5 +67,23 @@ public class StudentOperacje {
 		session.getTransaction().commit();
 		// zamkniecie sesji
 		session.close();
-	}	
+	}
+
+	public List<Student> findStudentByFilter(String imie) {
+		// otwiera sesje hibernate
+		SessionFactory sessionFactory = new Configuration().configure()
+				.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		// tworzenie zapytania
+		List<Student> listaStudent = session
+				.createQuery(
+						"select s from Student s WHERE s.imie = :imieParam")
+				.setParameter("imieParam", imie).list();
+
+		// zamkniecie sesji
+		session.close();
+		// zwroc liste
+		return listaStudent;
+	}
+
 }

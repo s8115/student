@@ -9,7 +9,6 @@ public class Student {
 
 	@Id // primary key
 	@GeneratedValue // automatycznie generowanie wartosci
-	
 	private Long id;  // pole = kolumna 
 
 	private String imie; // pole = kolumna
