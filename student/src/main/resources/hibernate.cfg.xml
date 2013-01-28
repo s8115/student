@@ -23,7 +23,7 @@
 
 		<!-- Encje -->
 		<mapping class="s8115.student.Student" />
-		
+		<mapping class="s8115.student.Uczelnia" />
 	</session-factory>
 </hibernate-configuration>
    
