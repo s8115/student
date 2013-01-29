@@ -6,6 +6,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * klasa operacji dla uczelni
+ * 
+ * @author Karol
+ * 
+ */
 public class UczelniaOperacje {
 
 	public void saveUczelnia(Uczelnia uczelnia) {
@@ -22,7 +28,7 @@ public class UczelniaOperacje {
 		// zamkniecie sesji
 		session.close();
 	}
-	
+
 	public Uczelnia findUczelniaById(Long id) {
 		// otwiera sesje hibernate
 		SessionFactory sessionFactory = new Configuration().configure()
@@ -37,7 +43,7 @@ public class UczelniaOperacje {
 
 		return uczelnia;
 	}
-	
+
 	public List<Uczelnia> findAllUczelnia() {
 		// otwiera sesje hibernate
 		SessionFactory sessionFactory = new Configuration().configure()
@@ -52,7 +58,7 @@ public class UczelniaOperacje {
 		// zwroc liste
 		return listaUczelnia;
 	}
-	
+
 	public void updateUczelnia(Uczelnia uczelnia) {
 		// otwiera sesje hibernate
 		SessionFactory sessionFactory = new Configuration().configure()
@@ -67,7 +73,14 @@ public class UczelniaOperacje {
 		// zamkniecie sesji
 		session.close();
 	}
-	
+
+	/**
+	 * szuka <b>uczelni</b> po nazwie.
+	 * 
+	 * @param nazwaUczelni
+	 *            nazwa
+	 * @return liste uczelni
+	 */
 	public List<Uczelnia> findUczelniaByFilter(String nazwaUczelni) {
 		// otwiera sesje hibernate
 		SessionFactory sessionFactory = new Configuration().configure()
@@ -84,4 +97,6 @@ public class UczelniaOperacje {
 		// zwroc liste
 		return listaUczelnia;
 	}
+	
+	
 }

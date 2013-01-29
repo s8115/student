@@ -1,15 +1,23 @@
 package s8115.student;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 // encja 
 @Entity
 public class Student {
 
-	@Id // primary key
-	@GeneratedValue // automatycznie generowanie wartosci
-	private Long id;  // pole = kolumna 
+	@Id
+	// primary key
+	@GeneratedValue
+	// automatycznie generowanie wartosci
+	private Long id; // pole = kolumna
 
 	private String imie; // pole = kolumna
 
@@ -19,7 +27,21 @@ public class Student {
 
 	private String telefon; // pole = kolumna
 
-	public Long getId() {    // metoda udostepniajaca wartosc pola
+	@ManyToMany(mappedBy = "listaStudentow", fetch = FetchType.EAGER)
+	// relacja student-uczelnia , mappedby-odwo³anie do relacji po drugiej
+	// stronie
+	private List<Uczelnia> listaUczelni; // lista studentów, pole do encji
+											// student
+
+	public List<Uczelnia> getListaUczelni() {
+		return listaUczelni;
+	}
+
+	public void setListaUczelni(List<Uczelnia> listaUczelni) {
+		this.listaUczelni = listaUczelni;
+	}
+
+	public Long getId() { // metoda udostepniajaca wartosc pola
 		return id;
 	}
 
@@ -27,7 +49,7 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getImie() {  // metoda do pobierania wartosc
+	public String getImie() { // metoda do pobierania wartosc
 		return imie;
 	}
 

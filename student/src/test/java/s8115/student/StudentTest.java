@@ -2,6 +2,7 @@
 
 package s8115.student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -19,8 +20,36 @@ public class StudentTest {
 		s.setNazwisko("Talmon");
 		s.setPesel("78110606353");
 		s.setTelefon("783050098");
-
-		studentOperacje.saveStudent(s);
+		
+		Uczelnia u1 = new Uczelnia();
+		u1.setNazwaUczelni ("Uniwersytet Gdañsk");
+		u1.setMiasto("Gdañsk");
+		u1.setUlica("Bazynskiego");
+		u1.setTelefon("103050098");
+		
+		Uczelnia u2 = new Uczelnia();
+		u2.setNazwaUczelni("Politechnika Gdañsk");
+		u2.setMiasto("Gdañsk");
+		u2.setUlica("Do Studzienki");
+		u2.setTelefon("783059000");
+		
+		List<Uczelnia> listaUczelni = new ArrayList<Uczelnia>();
+		listaUczelni.add(u1);
+		listaUczelni.add(u2);
+		
+		studentOperacje.saveStudentWithUczelnia(s, listaUczelni);
+		
+		
+		
+		//-------------------------
+		
+		Student studentZbazy = studentOperacje.findStudentById(s.getId());
+		
+		Assert.assertEquals(2, studentZbazy.getListaUczelni().size());  // sprawdzanie junitów
+		
+		for(Uczelnia ucz : studentZbazy.getListaUczelni()){
+			System.out.println("**** nazwa: "+ucz.getNazwaUczelni());
+		}
 	}
 	
 	@Test // testuje wyszukanie rekordu po Id
