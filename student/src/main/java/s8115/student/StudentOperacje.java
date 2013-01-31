@@ -105,6 +105,12 @@ public class StudentOperacje {
 
 		// zamkniecie sesji
 		session.close();
+		
+		
+		
+		
+		
+		
 		// zwroc liste
 		return listaStudent;
 	}
