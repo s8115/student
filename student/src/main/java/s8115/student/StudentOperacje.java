@@ -24,28 +24,28 @@ public class StudentOperacje {
 		session.close();
 	}
 
-	public void saveStudentWithUczelnia(Student student,
-			List<Uczelnia> listaUczelni) {
-		// otwiera sesje hibernate
-		SessionFactory sessionFactory = new Configuration().configure()
-				.buildSessionFactory();
-		Session session = sessionFactory.openSession();
-		// otwiera transakcje bazy danych
-		session.beginTransaction();
-		// zapisuje studenta
-		for (Uczelnia u:listaUczelni){
-			session.persist(u);
-		}
-		session.persist(student);
-		
-		student.setListaUczelni(listaUczelni);
-
-		// commituje transakcje, zatwierdza
-		session.getTransaction().commit();
-		// zamkniecie sesji
-		session.close();
-
-	}
+//	public void saveStudentWithUczelnia(Student student,
+//			List<Uczelnia> listaUczelni) {
+//		// otwiera sesje hibernate
+//		SessionFactory sessionFactory = new Configuration().configure()
+//				.buildSessionFactory();
+//		Session session = sessionFactory.openSession();
+//		// otwiera transakcje bazy danych
+//		session.beginTransaction();
+//		// zapisuje studenta
+//		for (Uczelnia u:listaUczelni){
+//			session.persist(u);
+//		}
+//		session.persist(student);
+//		
+//		student.setListaUczelni(listaUczelni);
+//
+//		// commituje transakcje, zatwierdza
+//		session.getTransaction().commit();
+//		// zamkniecie sesji
+//		session.close();
+//
+//	}
 
 	public Student findStudentById(Long id) {
 		// otwiera sesje hibernate
@@ -68,6 +68,7 @@ public class StudentOperacje {
 				.buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		// tworzenie zapytania
+		@SuppressWarnings("unchecked")
 		List<Student> listaStudent = session.createQuery(
 				"select s from Student s").list();
 
@@ -105,11 +106,6 @@ public class StudentOperacje {
 
 		// zamkniecie sesji
 		session.close();
-		
-		
-		
-		
-		
 		
 		// zwroc liste
 		return listaStudent;

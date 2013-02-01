@@ -7,22 +7,24 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class UczelniaTest {
-	
-	@Test // testuje zapis
+
+	@Test
+	// testuje zapis
 	public void saveTest() {
-	
-	UczelniaOperacje uczelniaOperacje = new UczelniaOperacje();
 
-	Uczelnia s = new Uczelnia();
-	s.setNazwaUczelni("PJWSTK");
-	s.setMiasto("Gdañsk");
-	s.setUlica("Brzegi");
-	s.setTelefon("58243578");
+		UczelniaOperacje uczelniaOperacje = new UczelniaOperacje();
 
-	uczelniaOperacje.saveUczelnia(s);
+		Uczelnia s = new Uczelnia();
+		s.setNazwaUczelni("PJWSTK");
+		s.setMiasto("Gdañsk");
+		s.setUlica("Brzegi");
+		s.setTelefon("58243578");
+
+		uczelniaOperacje.saveUczelnia(s);
 	}
-	
-	@Test // testuje wyszukanie rekordu po Id
+
+	@Test
+	// testuje wyszukanie rekordu po Id
 	public void findUczelniaTest() {
 
 		UczelniaOperacje uczelniaOperacje = new UczelniaOperacje();
@@ -34,48 +36,57 @@ public class UczelniaTest {
 		s.setTelefon("58243578");
 
 		uczelniaOperacje.saveUczelnia(s);
-		
 
 		Uczelnia s1 = uczelniaOperacje.findUczelniaById(s.getId());
 
 		Assert.assertNotNull(s1);
 		Assert.assertEquals("PJWSTK", s1.getNazwaUczelni());
-		
-		
+
 	}
-	
-	@Test  // testuje wyszukanie liste uczelni
+
+	@Test
+	// testuje wyszukanie liste uczelni
 	public void findListUczelniaTest() {
 
 		UczelniaOperacje uczelniaOperacje = new UczelniaOperacje();
 
-		List<Uczelnia>ListaUczelnia = uczelniaOperacje.findAllUczelnia();
-		
-		for(Uczelnia s : ListaUczelnia){
+		List<Uczelnia> listaUczelnia = uczelniaOperacje.findAllUczelnia();
+
+		for (Uczelnia s : listaUczelnia) {
 			System.out.println(s.getNazwaUczelni() + " " + s.getId());
 		}
+
+		Assert.assertNotNull(listaUczelnia);
+		Assert.assertTrue((listaUczelnia.size() > 0));
+
 	}
-	
-	@Test  // testuje wyszukanie liste Uczelni
+
+	@Test
+	// testuje wyszukanie liste Uczelni
 	public void findListUczelniaByNazwaUczelniTest() {
 
 		UczelniaOperacje uczelniaOperacje = new UczelniaOperacje();
 
-		List<Uczelnia>ListaUczelnia = uczelniaOperacje.findUczelniaByFilter("PJWSTK");
+		List<Uczelnia> listaUczelnia = uczelniaOperacje
+				.findUczelniaByFilter("PJWSTK");
 		System.out.println("@@@@@ SZUKANY OBIEKT:");
-		for(Uczelnia s : ListaUczelnia){
+
+		Assert.assertNotNull(listaUczelnia);
+		Assert.assertTrue((listaUczelnia.size() > 0));
+
+		for (Uczelnia s : listaUczelnia) {
 			System.out.println(s.getNazwaUczelni() + " " + s.getId());
 		}
 	}
-	
+
 	/**
-	 * testuje dodanie relacji uczelnia-student  i student-uczelnia
+	 * testuje dodanie relacji uczelnia-student i student-uczelnia
 	 */
-	@Test 
-	public void findAddUczelniaToStudent(){
-		
+	@Test
+	public void findAddUczelniaToStudent() {
+
 		UczelniaOperacje uczelniaOperacje = new UczelniaOperacje();
-		
+
 		Uczelnia s = new Uczelnia();
 		s.setNazwaUczelni("PJWSTK1234");
 		s.setMiasto("Gdañsk");
@@ -87,34 +98,32 @@ public class UczelniaTest {
 		s1.setNazwisko("Talmon");
 		s1.setPesel("78110606353");
 		s1.setTelefon("783050098");
-		
+
 		Student s2 = new Student();
 		s2.setImie("Krzyœ");
 		s2.setNazwisko("Nowak");
 		s2.setPesel("78111236353");
 		s2.setTelefon("783059528");
-		
+
 		List<Student> listaStudentow = new ArrayList<Student>();
 		listaStudentow.add(s1);
 		listaStudentow.add(s2);
-		
-		s.setListaStudentow(listaStudentow);
-		
-		uczelniaOperacje.saveUczelnia(s);
-		
-		// -----------------------
-		
-		Uczelnia uczelniaZBazt = uczelniaOperacje.findUczelniaById(s.getId());
-		
-		for(Student stu : uczelniaZBazt.getListaStudentow()){
-			System.out.println("#### imie: "+stu.getImie());
-		}
-		
-		
-	}
-	
 
+		s.setListaStudentow(listaStudentow);
+
+		uczelniaOperacje.saveUczelnia(s);
+
+		// -----------------------
+
+		Uczelnia uczelniaZBazt = uczelniaOperacje.findUczelniaById(s.getId());
+
+		// sprawdzenie
+		Assert.assertEquals(2, uczelniaZBazt.getListaStudentow().size());
+
+		for (Student stu : uczelniaZBazt.getListaStudentow()) {
+			System.out.println("#### imie: " + stu.getImie());
+		}
+
+	}
 
 }
-
-

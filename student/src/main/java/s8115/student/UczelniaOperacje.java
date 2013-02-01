@@ -9,7 +9,6 @@ import org.hibernate.cfg.Configuration;
 /**
  * klasa operacji dla uczelni
  * 
- * @author Karol
  * 
  */
 public class UczelniaOperacje {
@@ -75,7 +74,7 @@ public class UczelniaOperacje {
 	}
 
 	/**
-	 * szuka <b>uczelni</b> po nazwie.
+	 * szuka uczelni po nazwie.
 	 * 
 	 * @param nazwaUczelni
 	 *            nazwa
@@ -97,6 +96,5 @@ public class UczelniaOperacje {
 		// zwroc liste
 		return listaUczelnia;
 	}
-	
-	
+
 }

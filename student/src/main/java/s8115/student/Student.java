@@ -30,7 +30,7 @@ public class Student {
 	@ManyToMany(mappedBy = "listaStudentow", fetch = FetchType.EAGER)
 	// relacja student-uczelnia , mappedby-odwo³anie do relacji po drugiej STRONIE
 	// mappedBy -- relacja dwukierunkowa
-	private List<Uczelnia> listaUczelni; // lista studentów, pole do encji
+	private List<Uczelnia> listaUczelni; // lista uczelni, pole do encji
 											// student
 
 	public List<Uczelnia> getListaUczelni() {
